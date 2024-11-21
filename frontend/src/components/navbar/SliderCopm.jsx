@@ -1,41 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Slider } from "@mui/material";
-
+import useBookStore from "../../store/bookStore";
 
 const marks = [
-  {
-    value: 0,
-    label: "0",
-  },
-  {
-    value: 10,
-    label: "1",
-  },
-  {
-    value: 20,
-    label: "2",
-  },
-  {
-    value: 30,
-    label: "3",
-  },
-  {
-    value: 40,
-    label: "4",
-  },
-  {
-    value: 50,
-    label: "5",
-  },
+  { value: 0, label: '0' },
+  { value: 1, label: '1' },
+  { value: 2, label: '2' },
+  { value: 3, label: '3' },
+  { value: 4, label: '4' },
+  { value: 5, label: '5' },
 ];
-function calculateValue(value) {
-  return value / 10;
-}
 const SliderCopm = () => {
+  const { setAverageLikes, averageLikes,lang } = useBookStore();
+
   return (
     <Slider
       size="small"
-      scale={calculateValue}
       sx={{
         "& .MuiSlider-markLabel": {
           color: "gray",
@@ -47,7 +27,10 @@ const SliderCopm = () => {
       valueLabelDisplay="auto"
       marks={marks}
       min={0}
-      max={50}
+      max={5}
+      step={0.1}
+      value={averageLikes}
+      onChange={(e) => setAverageLikes(e.target.value)}
     />
   );
 };

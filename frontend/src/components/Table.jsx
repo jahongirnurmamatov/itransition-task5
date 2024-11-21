@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { tableData } from "../../public/assets";
 import ExpandedRow from "./ExpandedRow";
+import useBookStore from "../store/bookStore";
 
 const Table = () => {
   const [expandedRow, setExpandedRow] = useState(null);
-  
+  const {averageLikes,averageReviews,seed,lang} = useBookStore();
+  console.log(averageLikes,averageReviews,seed,lang)
   return (
     <div className="overflow-x-auto px-20 mt-10 bg-white">
       <table className="table w-full border ">
@@ -22,7 +24,7 @@ const Table = () => {
         {/* Table Body */}
         <tbody>
           {tableData.map((book, index) => (
-            <React.Fragment key={book.id} className="px-4 py-2">
+            <React.Fragment key={book.id} >
               {/* Collapsible Row */}
               <tr
                 className={`cursor-pointer font-semibold py-2 ${

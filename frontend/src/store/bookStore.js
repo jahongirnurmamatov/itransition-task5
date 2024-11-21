@@ -1,14 +1,14 @@
 import { create } from "zustand";
 
-const useAppState = create((set) => ({
+const useBookStore = create((set) => ({
   seed: "defaultSeed",
   lang: "en",
   averageLikes: 3.5,
   averageReviews: 4.2,
   setSeed: (seed) => set({ seed }),
-  setRegion: (region) => set({ region }),
+  setLang: (lang) => set({ lang }),
   setAverageLikes: (likes) => set({ averageLikes: likes }),
   setAverageReviews: (reviews) => set({ averageReviews: reviews }),
 }));
 
-export default useAppState;
+export default useBookStore;
