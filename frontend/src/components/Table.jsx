@@ -23,8 +23,7 @@ const Table = () => {
     getNextPageParam: (lastPage, pages) =>
       lastPage.length === 10 ? pages.length + 1 : undefined,
   });
-
-
+ 
     const handleScroll = (e) => {
       const { scrollTop, scrollHeight, clientHeight } = e.target;
       if (
@@ -51,9 +50,8 @@ const Table = () => {
 
         {/* Table Body */}
         <tbody>
-          {tableData.map((book, index) => (
+          {data?.pages[0].books.map((book, index) => (
             <React.Fragment key={book.id}>
-              {/* Collapsible Row */}
               <tr
                 className={`cursor-pointer font-semibold py-2 ${
                   expandedRow === index ? "bg-blue-200" : ""
@@ -76,7 +74,6 @@ const Table = () => {
                 </td>
                 <td></td>
               </tr>
-
               {expandedRow === index && <ExpandedRow book={book} />}
             </React.Fragment>
           ))}
