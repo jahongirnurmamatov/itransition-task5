@@ -4,7 +4,7 @@ import ExpandedRow from "./ExpandedRow";
 
 const Table = () => {
   const [expandedRow, setExpandedRow] = useState(null);
-
+  
   return (
     <div className="overflow-x-auto px-20 mt-10 bg-white">
       <table className="table w-full border ">
@@ -61,7 +61,7 @@ const Table = () => {
               {/* Accordion for Expanded Details */}
               {expandedRow === index && <ExpandedRow book={book} />}
             </React.Fragment>
-          ))}
+          ))}  
         </tbody>
       </table>
     </div>

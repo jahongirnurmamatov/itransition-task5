@@ -12,9 +12,9 @@ export function generateRandomReview(rng) {
     
     const rating = Math.floor(rng() * 5) + 1;
     const text = faker.lorem.sentence();
-    const author = faker.person.fullName();
+    const reviewer = faker.person.fullName();
 
-    return { rating, text, author };
+    return { rating, text, reviewer };
 }
 
 // generating review arrays using the above function and using tthe seed
