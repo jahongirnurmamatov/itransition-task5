@@ -13,6 +13,7 @@ const ShuffleIcon = () => {
       stroke-linecap="round"
       stroke-linejoin="round"
       class="lucide lucide-shuffle"
+      className="w-5"
     >
       <path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.1-8.6c.7-1.1 2-1.7 3.3-1.7H22" />
       <path d="m18 2 4 4-4 4" />

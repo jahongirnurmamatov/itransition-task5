@@ -13,16 +13,16 @@ const Navbar = () => {
         <div className="bg-white border-1 border-gray-400 w-[200px] py-2 flex items-center justify-between px-3 rounded-lg ">
           <div className="flex flex-col gap-0 text-start">
             <p className="text-sm text-gray-500">Seed</p>
-            <span className="textarea-lg p-0">1234123123 </span>
+            <input className="textarea-lg p-0 outline-none border-none w-full text-sm" placeholder="Enter seed or shuffle..."/>
           </div>
-          <ShuffleIcon className="w-8 h-8" />
+          <ShuffleIcon  />
         </div>
         <div className="w-40 ">
           <p className="text-gray-500 text-start text-sm">Likes</p>
           <SliderCopm/>
         </div>
-        <div className="bg-white border-1 border-gray-400 w-[200px] py-2 px-3 rounded-lg ">
-          <p className="text-gray-500 text-start text-sm">Review</p>
+        <div className="bg-white border-1 border-gray-400 w-[200px] py-1 px-3 rounded-lg ">
+          <p className="text-gray-500 text-start text-sm -mb-3">Review</p>
           <input
             type="number"
             min={0}
