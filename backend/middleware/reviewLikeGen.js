@@ -1,23 +1,24 @@
 import seedrandom from 'seedrandom';
-import faker from '@faker-js/faker';
+import { faker } from '@faker-js/faker'
 
 
-function initializeFakerWithSeed(seed) {
+export function initializeFakerWithSeed(seed) {
   const rng = seedrandom(seed);
   faker.seed(rng());
 }
 
 // to generate random review from the seed rng given
-function generateRandomReview(rng) {
+export function generateRandomReview(rng) {
+    
     const rating = Math.floor(rng() * 5) + 1;
     const text = faker.lorem.sentence();
-    const author = faker.name.findName();
+    const author = faker.person.fullName();
 
     return { rating, text, author };
 }
 
 // generating review arrays using the above function and using tthe seed
-function generateReviews(seed, averageReviews) {
+export function generateReviews(seed, averageReviews) {
     const rng = seedrandom(seed); // Seed the random number generator
   
     const integerReviews = Math.floor(averageReviews);
@@ -36,7 +37,7 @@ function generateReviews(seed, averageReviews) {
   }
 
   //generating likes for the farctional like value passed through slider input and seed value 
-  function generateLikes(seed, avgLikes) {
+  export function generateLikes(seed, avgLikes) {
     const rng = seedrandom(seed);
   
     const integerLikes = Math.floor(avgLikes);
@@ -49,3 +50,8 @@ function generateReviews(seed, averageReviews) {
   
     return likes;
   }
+
+//   initializeFakerWithSeed(3123);
+//   const rng = seedrandom(3123)
+//   // console.log(generateRandomReview(rng))
+// console.log(generateReviews(123,4.3))

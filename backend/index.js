@@ -1,12 +1,12 @@
-import express from 'express';
+import express from "express";
 
 
 const app = express();
 
-app.get('/api/books', (req, res) => {
-//to do generate book function
-    const books = {};
+app.get("/api/books", (req, res) => {
+  
+
   res.json({ books });
 });
 
-app.listen(5000, () => console.log('Server running on http://localhost:5000'));
+app.listen(5000, () => console.log("Server running on http://localhost:5000"));
