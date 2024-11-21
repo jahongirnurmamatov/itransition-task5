@@ -34,3 +34,18 @@ function generateReviews(seed, averageReviews) {
   
     return reviews;
   }
+
+  //generating likes for the farctional like value passed through slider input and seed value 
+  function generateLikes(seed, avgLikes) {
+    const rng = seedrandom(seed);
+  
+    const integerLikes = Math.floor(avgLikes);
+    const fractionalLikes = avgLikes - integerLikes;
+  
+    let likes = integerLikes;
+    if (rng() < fractionalLikes) {
+      likes += 1;
+    }
+  
+    return likes;
+  }
