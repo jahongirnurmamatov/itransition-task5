@@ -1,10 +1,21 @@
 import express from "express";
-
+import { generateBooks } from "./middleware/bookGeneration.js";
 
 const app = express();
 
 app.get("/api/books", (req, res) => {
-  
+  const { seed=123, lang = "en_Us", avgLikes = 4.51, avgReviews = 4.9 } = req.query;
+
+  if (!seed) {
+    return res.status(400).json({ error: "Seed is required" });
+  }
+
+  const books = generateBooks(
+    seed,
+    lang,
+    parseFloat(avgLikes),
+    parseFloat(avgReviews)
+  );
 
   res.json({ books });
 });

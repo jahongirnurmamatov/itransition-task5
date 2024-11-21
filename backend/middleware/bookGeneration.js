@@ -2,11 +2,8 @@ import {faker} from '@faker-js/faker'
 import seedrandom from 'seedrandom';
 import { generateLikes, generateReviews, initializeFakerWithSeed } from './reviewLikeGen.js';
 
-function generateBooks(seed=12, lang, avgLikes = 0, avgReviews = 0) {
-    // Initialize faker with the seed
+export function generateBooks(seed=12, lang, avgLikes = 0, avgReviews = 0) {
     initializeFakerWithSeed(seed);
-
-    
     faker.locale = lang || "en_US"
 
     // generatting random seed with books to ensure the same books are fetched every time with same seed value
