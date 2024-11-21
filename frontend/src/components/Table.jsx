@@ -3,12 +3,40 @@ import { tableData } from "../../public/assets";
 import ExpandedRow from "./ExpandedRow";
 import useBookStore from "../store/bookStore";
 import { IoIosArrowDown } from "react-icons/io";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { fetchBooks } from "../middleware/apiFetching";
 const Table = () => {
   const [expandedRow, setExpandedRow] = useState(null);
   const { averageLikes, averageReviews, seed, lang } = useBookStore();
 
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isError, error } =
+  useInfiniteQuery({
+    queryKey: ["books", seed, lang, averageLikes, averageReviews],
+    queryFn: ({ pageParam = 1 }) =>
+      fetchBooks({
+        pageParam,
+        seed,
+        lang, 
+        likes: averageLikes,
+        reviews: averageReviews,
+      }),
+    getNextPageParam: (lastPage, pages) =>
+      lastPage.length === 10 ? pages.length + 1 : undefined,
+  });
+
+
+    const handleScroll = (e) => {
+      const { scrollTop, scrollHeight, clientHeight } = e.target;
+      if (
+        scrollHeight - scrollTop === clientHeight &&
+        hasNextPage &&
+        !isFetchingNextPage
+      ) {
+        fetchNextPage();
+      }
+    };
   return (
-    <div className="overflow-x-auto px-20 mt-10 bg-white">
+    <div className="overflow-x-auto px-20 mt-10 bg-white " onScroll={handleScroll}>
       <table className="table w-full border ">
         {/* Table Header */}
         <thead className="font-bold text-gray-900 sticky top-0 bg-white z-10 ">
@@ -49,7 +77,6 @@ const Table = () => {
                 <td></td>
               </tr>
 
-              {/* Accordion for Expanded Details */}
               {expandedRow === index && <ExpandedRow book={book} />}
             </React.Fragment>
           ))}
