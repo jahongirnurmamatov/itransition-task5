@@ -7,9 +7,8 @@ import SliderCopm from "./SliderCopm";
 
 const Navbar = () => {
   return (
-    <div className="flex items-center w-full py-5 px-10 justify-between bg-gray-100">
+    <div className="flex items-center bg-base-200 w-full py-5 px-10 justify-between  sticky top-0 z-50 shadow-md">
       <Logo />
-
       <div className="flex items-center gap-10">
         <div className="bg-white border-1 border-gray-400 w-[200px] py-2 flex items-center justify-between px-3 rounded-lg ">
           <div className="flex flex-col gap-0 text-start">
@@ -27,8 +26,9 @@ const Navbar = () => {
           <input
             type="number"
             min={0}
-            max={10}
+            max={5}
             step={0.1}
+            defaultValue={5}
             className="border-none bg-inherit w-full outline-none text-lg"
           />
         </div>
