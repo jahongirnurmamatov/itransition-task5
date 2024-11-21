@@ -1,18 +1,12 @@
-import express from 'express'
-import cors from 'cors';
-import dotenv from 'dotenv'
+import express from 'express';
 
-dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
-// middleware to use CORS and json
-app.use(cors());
-app.use(express.json());
+app.get('/api/books', (req, res) => {
+//to do generate book function
+    const books = {};
+  res.json({ books });
+});
 
-app.get('/',(req,res)=>{
-    res.send('Hello World!')
-})
-
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(5000, () => console.log('Server running on http://localhost:5000'));
