@@ -29,6 +29,7 @@ export function generateBooks(
 
   const combinedSeed = `${seed}-likes:${avgLikes}-reviews:${avgReviews}-page:${page}-${lang}`;
 
+  console.log(combinedSeed)
   initializeFakerWithSeed(combinedSeed);
 
   const books = Array.from({ length: pageSize }).map((_, index) => {

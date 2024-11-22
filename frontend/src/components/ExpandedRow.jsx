@@ -8,11 +8,15 @@ const ExpandedRow = ({ book }) => {
       <td colSpan="6">
         <div className="collapse collapse-open grid grid-cols-5 px-14 py-2">
           <div className="col-span-1 flex flex-col gap-4 items-center py-5">
-            <img
-              className="w-40 h-auto"
-              src="https://www.designforwriters.com/wp-content/uploads/2017/10/design-for-writers-book-cover-tf-2-a-million-to-one.jpg"
-              alt={book.title}
-            />
+            <div className="relative">
+              <img
+                className="w-40 h-auto"
+                src="/book-cover.webp"
+                alt={book.title}
+              />
+              <p className="absolute top-10 px-3 font-bold   text-center font-serif  ">{book.title}</p>
+              <p className="absolute top-20 px-3 py-3 text-center italic  ">{book.author}</p>
+            </div>
             <p className="bg-blue-600 flex gap-2  px-2 py-1 rounded-full">
               <span className="text-white font-bold">{book.likes}</span>
               <BiSolidLike className="text-white" size={18} />
