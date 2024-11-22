@@ -40,7 +40,7 @@ const Table = () => {
     const { scrollTop, scrollHeight, clientHeight } = e.target;
     console.log(scrollHeight - scrollTop, clientHeight, hasNextPage);
     if (
-      scrollHeight - scrollTop <= clientHeight + 20 && 
+      scrollHeight - scrollTop <= clientHeight && 
       hasNextPage &&
       !isFetchingNextPage
     ) {
@@ -55,8 +55,8 @@ const Table = () => {
     >
       <table className="table w-full border ">
         {/* Table Header */}
-        <thead className="font-bold text-gray-900 sticky top-0 bg-white z-10 ">
-          <tr className="border-b-2 border-gray-900 py-2">
+        <thead className="font-bold text-gray-900 sticky top-0 bg-white z-10 border-b-2  border-gray-900 py-2 ">
+          <tr className="">
             <th>#</th>
             <th>ISBN</th>
             <th>Title</th>
@@ -66,6 +66,7 @@ const Table = () => {
         </thead>
 
         {/* Table Body */}
+        {isError && <p className="p-4 text-xl text-red-500">{error}</p>}
         <tbody>
           {books.map((book, index) => (
             <React.Fragment key={index}>

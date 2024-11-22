@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 const useBookStore = create((set) => ({
-  seed: "defaultSeed",
+  seed: 1,
   lang: "en",
   averageLikes: 3.5,
   averageReviews: 4.2,

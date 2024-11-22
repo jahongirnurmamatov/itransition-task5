@@ -1,5 +1,6 @@
 import React from "react";
 import { BiSolidLike } from "react-icons/bi";
+import Review from "./Review";
 
 const ExpandedRow = ({ book }) => {
   return (
@@ -27,10 +28,15 @@ const ExpandedRow = ({ book }) => {
             </div>
             <div className="flex flex-col gap-3 mt-4">
               <h3 className="tetx-2xl font-bold">Review</h3>
-              {book?.reviews.map((review) => (
-                <div className="flex flex-col">
-                  <p>{review.text}</p>
-                  <span className="text-gray-400">  - {review.reviewer}</span>
+              {book?.reviews.map((review, index) => (
+                <div key={index} className="flex flex-col  gap-1 ">
+                  <p>
+                    Review from{" "}
+                    <span className="text-gray-600"> - {review.reviewer}</span>
+                  </p>
+                  <Review review={review} index={index} />
+
+                  <p className="italic">{review.text}</p>
                 </div>
               ))}
             </div>
