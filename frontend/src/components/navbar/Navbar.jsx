@@ -6,15 +6,12 @@ import SliderCopm from "./SliderCopm";
 import useBookStore from "../../store/bookStore";
 
 const Navbar = () => {
-  const {
-    seed,
-    setSeed,
-    lang,
-    setLang,
-    averageReviews,
-    setAverageReviews,
-  } = useBookStore();
+  const { seed, setSeed, lang, setLang, averageReviews, setAverageReviews } =
+    useBookStore();
 
+  const shuffle = () => {
+    setSeed(Math.floor(Math.random() * 1000000) + 1);
+  };
   return (
     <div className="flex items-center bg-base-200 w-full py-5 px-10 justify-between  sticky top-0 z-50 shadow-md">
       <Logo />
@@ -29,7 +26,7 @@ const Navbar = () => {
               onChange={(e) => setSeed(e.target.value)}
             />
           </div>
-          <IoShuffle size={24}/>
+          <IoShuffle onClick={shuffle} size={24} />
         </div>
         <div className="w-40 ">
           <p className="text-gray-500 text-start text-sm">Likes</p>
