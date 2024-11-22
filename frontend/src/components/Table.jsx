@@ -26,8 +26,12 @@ const Table = () => {
         avgLikes: averageLikes,
         avgReviews: averageReviews,
       }),
-    getNextPageParam: (lastPage, pages) =>
-      lastPage.books.length === 10 ? pages.length + 1 : undefined,
+    getNextPageParam: (lastPage, pages) =>{
+      if (lastPage.books.length < 10) {
+        return undefined; 
+      }
+      return pages.length + 1;
+    }
   });
 
   const books = data?.pages?.flatMap((page) => page.books) || [];
@@ -36,16 +40,17 @@ const Table = () => {
     const { scrollTop, scrollHeight, clientHeight } = e.target;
     console.log(scrollHeight - scrollTop, clientHeight, hasNextPage);
     if (
-      scrollHeight - scrollTop <= clientHeight + 5 &&
+      scrollHeight - scrollTop <= clientHeight + 20 && 
       hasNextPage &&
       !isFetchingNextPage
     ) {
+      console.log("hasNextPage", hasNextPage);
       fetchNextPage();
     }
   };
   return (
     <div
-      className="overflow-x-auto h-[90vh] px-20 mt-10 bg-white overflow-y-auto "
+       className="overflow-x-auto h-[90vh] px-20 mt-10 bg-white overflow-y-auto"
       onScroll={handleScroll}
     >
       <table className="table w-full border ">
