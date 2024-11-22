@@ -1,6 +1,8 @@
 import { create } from "zustand";
 
 const useBookStore = create((set) => ({
+  books:[],
+  setBooks: (books) => set({ books }),
   seed: 1,
   lang: "en",
   averageLikes: 3.5,

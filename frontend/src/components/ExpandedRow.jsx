@@ -4,7 +4,7 @@ import Review from "./Review";
 
 const ExpandedRow = ({ book }) => {
   return (
-    <tr className="bg-slate-100 w-full">
+    <tr className="bg-secondary-content w-full">
       <td colSpan="6">
         <div className="collapse collapse-open grid grid-cols-5 px-14 py-2">
           <div className="col-span-1 flex flex-col gap-4 items-center py-5">

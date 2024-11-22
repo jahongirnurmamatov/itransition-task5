@@ -4,23 +4,36 @@ import ThemeToggle from "./ThemeToggle";
 import Logo from "./Logo";
 import SliderCopm from "./SliderCopm";
 import useBookStore from "../../store/bookStore";
+import { FaFileCsv } from "react-icons/fa6";
+import { CSVLink } from "react-csv";
 
 const Navbar = () => {
-  const { seed, setSeed, lang, setLang, averageReviews, setAverageReviews } =
-    useBookStore();
+  const {
+    seed,
+    setSeed,
+    lang,
+    setLang,
+    averageReviews,
+    setAverageReviews,
+    books,
+  } = useBookStore();
 
   const shuffle = () => {
     setSeed(Math.floor(Math.random() * 1000000) + 1);
+  };
+
+  const handleExportCsv = () => {
+    generateCSV(books, "books-data");
   };
   return (
     <div className="flex items-center bg-base-200 w-full py-5 px-10 justify-between  sticky top-0 z-50 shadow-md">
       <Logo />
       <div className="flex items-center gap-10">
-        <div className="bg-white border-1 border-gray-400 w-[200px] py-2 flex items-center justify-between px-3 rounded-lg ">
+        <div className="bg-base-100  border-1 border-gray-400 w-[200px] py-2 flex items-center justify-between px-3 rounded-lg ">
           <div className="flex flex-col gap-0 text-start">
             <p className="text-sm text-gray-500">Seed</p>
             <input
-              className="textarea-lg p-0 outline-none border-none w-full text-sm"
+              className="textarea-lg bg-base-100 p-0 outline-none border-none w-full text-sm"
               placeholder="Enter seed or shuffle..."
               value={seed}
               onChange={(e) => setSeed(e.target.value)}
@@ -32,8 +45,8 @@ const Navbar = () => {
           <p className="text-gray-500 text-start text-sm">Likes</p>
           <SliderCopm />
         </div>
-        <div className="bg-white border-1 border-gray-400 w-[200px] py-1 px-3 rounded-lg ">
-          <p className="text-gray-500 text-start text-sm -mb-3">Review</p>
+        <div className="bg-base-100 border-1 border-gray-400 w-[200px] py-3 px-3 rounded-lg ">
+          <p className="text-gray-500 text-start text-sm -mb-1">Review</p>
           <input
             type="number"
             min={0}
@@ -41,7 +54,7 @@ const Navbar = () => {
             step={0.1}
             value={averageReviews}
             onChange={(e) => setAverageReviews(e.target.value)}
-            className="border-none bg-inherit w-full outline-none text-lg"
+            className="border-none bg-inherit p-0 w-full outline-none text-md"
           />
         </div>
       </div>
@@ -59,7 +72,12 @@ const Navbar = () => {
           <option value="it">Italian</option>
           <option value="ru">Russian</option>
         </select>
-        <ThemeToggle />
+        <div className="flex gap-5">
+          <ThemeToggle />
+          <CSVLink data={books}>
+            <FaFileCsv className="size-7 cursor-pointer" />
+          </CSVLink>
+        </div>
       </div>
     </div>
   );

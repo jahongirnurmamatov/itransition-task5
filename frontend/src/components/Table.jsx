@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { tableData } from "../../public/assets";
 import ExpandedRow from "./ExpandedRow";
 import useBookStore from "../store/bookStore";
@@ -7,7 +7,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { fetchBooks } from "../middleware/apiFetching";
 const Table = () => {
   const [expandedRow, setExpandedRow] = useState(null);
-  const { averageLikes, averageReviews, seed, lang } = useBookStore();
+  const { averageLikes, averageReviews, seed, lang, setBooks } = useBookStore();
 
   const {
     data,
@@ -26,21 +26,25 @@ const Table = () => {
         avgLikes: averageLikes,
         avgReviews: averageReviews,
       }),
-    getNextPageParam: (lastPage, pages) =>{
+    getNextPageParam: (lastPage, pages) => {
       if (lastPage.books.length < 10) {
-        return undefined; 
+        return undefined;
       }
       return pages.length + 1;
-    }
+    },
   });
 
   const books = data?.pages?.flatMap((page) => page.books) || [];
+ 
 
+  useEffect(()=>{
+   if(books)  setBooks(books)
+  },[data])
   const handleScroll = (e) => {
     const { scrollTop, scrollHeight, clientHeight } = e.target;
-    console.log(scrollHeight - scrollTop, clientHeight, hasNextPage);
+
     if (
-      scrollHeight - scrollTop <= clientHeight && 
+      scrollHeight - scrollTop <= clientHeight &&
       hasNextPage &&
       !isFetchingNextPage
     ) {
@@ -50,12 +54,12 @@ const Table = () => {
   };
   return (
     <div
-       className="overflow-x-auto h-[90vh] px-20 mt-10 bg-white overflow-y-auto"
+      className="overflow-x-auto h-[90vh] px-20 mt-10 bg-base-100 overflow-y-auto"
       onScroll={handleScroll}
     >
-      <table className="table w-full border ">
+      <table className="table w-full border-t ">
         {/* Table Header */}
-        <thead className="font-bold text-gray-900 sticky top-0 bg-white z-10 border-b-2  border-gray-900 py-2 ">
+        <thead className="font-extrabold z-12 texts-accent-content  sticky top-0 border-b-2 bg-base-100 border-gray-900 py-2 ">
           <tr className="">
             <th>#</th>
             <th>ISBN</th>
@@ -71,8 +75,8 @@ const Table = () => {
           {books.map((book, index) => (
             <React.Fragment key={index}>
               <tr
-                className={`cursor-pointer font-semibold py-2 ${
-                  expandedRow === index ? "bg-blue-200" : ""
+                className={`cursor-pointer  py-2 ${
+                  expandedRow === index ? "bg-gray-400 dark:text-gray-700" : ""
                 }`}
                 onClick={() =>
                   setExpandedRow(expandedRow === index ? null : index)

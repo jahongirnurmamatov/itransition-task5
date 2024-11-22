@@ -30,11 +30,9 @@ export function generateBooks(
   if (!faker) {
     throw new Error(`Unsupported language: ${lang}`);
   }
-
+  //  generating very specific case of seed to ensure every change in input results in change of books
   const combinedSeed = `${seed}-likes:${avgLikes}-reviews:${avgReviews}-page:${page}-${lang}`;
-  console.log(`Combined Seed: ${combinedSeed}`);
-
-  // Pass the locale-specific faker instance to initializeFakerWithSeed
+  // we pass the locale-specific faker instance to initializeFakerWithSeed
   initializeFakerWithSeed(combinedSeed, faker);
 
   const books = Array.from({ length: pageSize }).map((_, index) => {
