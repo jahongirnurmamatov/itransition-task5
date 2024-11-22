@@ -1,6 +1,6 @@
 import React from "react";
 import { BiSolidLike } from "react-icons/bi";
-import { reviews } from "../../public/assets";
+
 const ExpandedRow = ({ book }) => {
   return (
     <tr className="bg-slate-100 w-full">

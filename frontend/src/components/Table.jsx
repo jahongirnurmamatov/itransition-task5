@@ -9,33 +9,45 @@ const Table = () => {
   const [expandedRow, setExpandedRow] = useState(null);
   const { averageLikes, averageReviews, seed, lang } = useBookStore();
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isError, error } =
-  useInfiniteQuery({
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isError,
+    error,
+  } = useInfiniteQuery({
     queryKey: ["books", seed, lang, averageLikes, averageReviews],
     queryFn: ({ pageParam = 1 }) =>
       fetchBooks({
         pageParam,
         seed,
-        lang, 
-        likes: averageLikes,
-        reviews: averageReviews,
+        lang,
+        avgLikes: averageLikes,
+        avgReviews: averageReviews,
       }),
     getNextPageParam: (lastPage, pages) =>
-      lastPage.length === 10 ? pages.length + 1 : undefined,
+      lastPage.books.length === 10 ? pages.length + 1 : undefined,
   });
- 
-    const handleScroll = (e) => {
-      const { scrollTop, scrollHeight, clientHeight } = e.target;
-      if (
-        scrollHeight - scrollTop === clientHeight &&
-        hasNextPage &&
-        !isFetchingNextPage
-      ) {
-        fetchNextPage();
-      }
-    };
+
+  const books = data?.pages?.flatMap((page) => page.books) || [];
+
+  const handleScroll = (e) => {
+    const { scrollTop, scrollHeight, clientHeight } = e.target;
+    console.log(scrollHeight - scrollTop, clientHeight, hasNextPage);
+    if (
+      scrollHeight - scrollTop <= clientHeight + 5 &&
+      hasNextPage &&
+      !isFetchingNextPage
+    ) {
+      fetchNextPage();
+    }
+  };
   return (
-    <div className="overflow-x-auto px-20 mt-10 bg-white " onScroll={handleScroll}>
+    <div
+      className="overflow-x-auto h-[90vh] px-20 mt-10 bg-white overflow-y-auto "
+      onScroll={handleScroll}
+    >
       <table className="table w-full border ">
         {/* Table Header */}
         <thead className="font-bold text-gray-900 sticky top-0 bg-white z-10 ">
@@ -50,8 +62,8 @@ const Table = () => {
 
         {/* Table Body */}
         <tbody>
-          {data?.pages[0].books.map((book, index) => (
-            <React.Fragment key={book.id}>
+          {books.map((book, index) => (
+            <React.Fragment key={index}>
               <tr
                 className={`cursor-pointer font-semibold py-2 ${
                   expandedRow === index ? "bg-blue-200" : ""
@@ -77,6 +89,9 @@ const Table = () => {
               {expandedRow === index && <ExpandedRow book={book} />}
             </React.Fragment>
           ))}
+          {isFetchingNextPage && (
+            <div className="text-center py-4">Loading more books...</div>
+          )}
         </tbody>
       </table>
     </div>
