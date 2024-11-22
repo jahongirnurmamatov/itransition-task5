@@ -7,10 +7,10 @@ const app = express();
 app.use(cors());
 app.get("/api/books", (req, res) => {
   const {
-    seed = 123,
+    seed,
     lang = "en_Us",
-    avgLikes = 4.51,
-    avgReviews = 4.9,
+    likes,
+    reviews,
   } = req.query;
 
   if (!seed) {
@@ -20,8 +20,8 @@ app.get("/api/books", (req, res) => {
   const books = generateBooks(
     seed,
     lang,
-    parseFloat(avgLikes),
-    parseFloat(avgReviews)
+    parseFloat(likes),
+    parseFloat(reviews)
   );
 
   res.json({ books });

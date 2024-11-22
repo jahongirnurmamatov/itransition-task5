@@ -11,8 +11,6 @@ const Navbar = () => {
     setSeed,
     lang,
     setLang,
-    averageLikes,
-    setAverageLikes,
     averageReviews,
     setAverageReviews,
   } = useBookStore();

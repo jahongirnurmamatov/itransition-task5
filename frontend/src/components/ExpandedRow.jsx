@@ -27,10 +27,10 @@ const ExpandedRow = ({ book }) => {
             </div>
             <div className="flex flex-col gap-3 mt-4">
               <h3 className="tetx-2xl font-bold">Review</h3>
-              {reviews.map((review) => (
+              {book?.reviews.map((review) => (
                 <div className="flex flex-col">
-                  <p>{review.review}</p>
-                  <span className="text-gray-400">  - {review.author}</span>
+                  <p>{review.text}</p>
+                  <span className="text-gray-400">  - {review.reviewer}</span>
                 </div>
               ))}
             </div>

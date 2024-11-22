@@ -5,6 +5,7 @@ import { generateLikes, generateReviews, initializeFakerWithSeed } from './revie
 export function generateBooks(seed, lang, avgLikes = 0, avgReviews = 0,page = 1, pageSize = 10) {
     initializeFakerWithSeed(seed);
     faker.locale = lang || "en_US"
+    console.log(seed,lang,avgLikes,avgReviews,page,pageSize)
 
     // generatting random seed with books to ensure the same books are fetched every time with same seed value
     const bookRng = seedrandom(`${seed}-books`);
