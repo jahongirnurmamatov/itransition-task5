@@ -1,35 +1,34 @@
 import seedrandom from 'seedrandom';
 import { faker } from '@faker-js/faker'
 
-
-export function initializeFakerWithSeed(seed) {
-  // Convert the seed into a numeric seed using seedrandom
+export function initializeFakerWithSeed(seed, fakerInstance) {
   const rng = seedrandom(seed);
-  const numericSeed = Math.floor(rng() * 1_000_000); // Generate a consistent numeric seed
-  faker.seed(numericSeed); // Reinitialize faker with the numeric seed
+  const numericSeed = Math.floor(rng() * 1_000_000);
+  fakerInstance.seed(numericSeed); 
 }
 
+
 // to generate random review from the seed rng given
-export function generateRandomReview(rng) {
+export function generateRandomReview(rng,fakerInstance) {
     const rating = Math.floor(rng() * 5) + 1;
-    const text =  faker.lorem.sentence();
-    const reviewer =  faker.person.fullName();
+    const text =  fakerInstance.lorem.sentence();
+    const reviewer =  fakerInstance.person.fullName();
     return { rating, text, reviewer };
 }
 
 // generating review arrays using the above function and using tthe seed
-export function generateReviews(seed, averageReviews) {
+export function generateReviews(seed, averageReviews,fakerInstance) {
     const rng = seedrandom(seed); // Seed the random number generator
     const integerReviews = Math.floor(averageReviews);
     const fractionalReview = averageReviews - integerReviews;
   
     const reviews = [];
     for (let i = 0; i < integerReviews; i++) {
-      reviews.push(generateRandomReview(rng));
+      reviews.push(generateRandomReview(rng,fakerInstance));
     }
   
     if (rng() < fractionalReview) {
-      reviews.push(generateRandomReview(rng));
+      reviews.push(generateRandomReview(rng,fakerInstance));
     }
   
     return reviews;

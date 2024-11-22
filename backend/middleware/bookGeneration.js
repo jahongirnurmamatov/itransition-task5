@@ -27,10 +27,15 @@ export function generateBooks(
 
   const faker = allFakers[locale];
 
-  const combinedSeed = `${seed}-likes:${avgLikes}-reviews:${avgReviews}-page:${page}-${lang}`;
+  if (!faker) {
+    throw new Error(`Unsupported language: ${lang}`);
+  }
 
-  console.log(combinedSeed)
-  initializeFakerWithSeed(combinedSeed);
+  const combinedSeed = `${seed}-likes:${avgLikes}-reviews:${avgReviews}-page:${page}-${lang}`;
+  console.log(`Combined Seed: ${combinedSeed}`);
+
+  // Pass the locale-specific faker instance to initializeFakerWithSeed
+  initializeFakerWithSeed(combinedSeed, faker);
 
   const books = Array.from({ length: pageSize }).map((_, index) => {
     const globalIndex = (page - 1) * pageSize + index;
@@ -39,14 +44,14 @@ export function generateBooks(
     const reviewSeed = `${bookSeed}-reviews`;
 
     const book = {
-      id: globalIndex + 1,
-      title: faker.book.title(),
+      id:  globalIndex + 1,
+      title: lang === "en" ?  faker.book.title() :faker.lorem.sentence(({ min: 1, max: 4 }) ) ,
       author: faker.person.fullName(),
       isbn: faker.commerce.isbn(),
       publisher:
         lang === "en_US" ? faker.book.publisher() : faker.location.streetAddress(),
       likes: generateLikes(bookSeed, avgLikes),
-      reviews: generateReviews(reviewSeed, avgReviews),
+      reviews: generateReviews(reviewSeed, avgReviews, faker),
     };
 
     return book;
