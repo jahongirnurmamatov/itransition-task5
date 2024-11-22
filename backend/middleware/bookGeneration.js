@@ -1,5 +1,19 @@
-import {faker} from '@faker-js/faker'
-import { generateLikes, generateReviews, initializeFakerWithSeed } from './reviewLikeGen.js';
+import {
+  generateLikes,
+  generateReviews,
+  initializeFakerWithSeed,
+} from "./reviewLikeGen.js";
+import { allFakers } from "@faker-js/faker";
+
+const locales = {
+  en: "en_US",
+  uz: "uz_UZ_latin",
+  de: "de",
+  ru: "ru",
+  fr: "fr",
+  es: "es",
+  it: "it",
+};
 
 export function generateBooks(
   seed,
@@ -9,13 +23,14 @@ export function generateBooks(
   page,
   pageSize = 10
 ) {
-  // Combine seed with avgLikes and avgReviews to make it unique
-  const combinedSeed = `${seed}-likes:${avgLikes}-reviews:${avgReviews}-page:${page}`;
-  
-  initializeFakerWithSeed(combinedSeed); // Initialize faker with the combined seed
-  faker.locale = lang || "en_US";
+  const locale = locales[lang] || "en_US";
 
-  // Generate books with the modified seed
+  const faker = allFakers[locale];
+
+  const combinedSeed = `${seed}-likes:${avgLikes}-reviews:${avgReviews}-page:${page}-${lang}`;
+
+  initializeFakerWithSeed(combinedSeed);
+
   const books = Array.from({ length: pageSize }).map((_, index) => {
     const globalIndex = (page - 1) * pageSize + index;
 
@@ -23,11 +38,12 @@ export function generateBooks(
     const reviewSeed = `${bookSeed}-reviews`;
 
     const book = {
-      id: globalIndex+1,
+      id: globalIndex + 1,
       title: faker.book.title(),
-      author: faker.book.author(),
+      author: faker.person.fullName(),
       isbn: faker.commerce.isbn(),
-      publisher: faker.book.publisher(),
+      publisher:
+        lang === "en_US" ? faker.book.publisher() : faker.location.streetAddress(),
       likes: generateLikes(bookSeed, avgLikes),
       reviews: generateReviews(reviewSeed, avgReviews),
     };
@@ -37,4 +53,3 @@ export function generateBooks(
 
   return books;
 }
-

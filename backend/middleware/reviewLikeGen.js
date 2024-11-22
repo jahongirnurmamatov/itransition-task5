@@ -12,8 +12,8 @@ export function initializeFakerWithSeed(seed) {
 // to generate random review from the seed rng given
 export function generateRandomReview(rng) {
     const rating = Math.floor(rng() * 5) + 1;
-    const text = faker.lorem.sentence();
-    const reviewer = faker.person.fullName();
+    const text =  faker.lorem.sentence();
+    const reviewer =  faker.person.fullName();
     return { rating, text, reviewer };
 }
 
