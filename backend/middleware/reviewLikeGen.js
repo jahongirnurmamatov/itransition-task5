@@ -3,24 +3,23 @@ import { faker } from '@faker-js/faker'
 
 
 export function initializeFakerWithSeed(seed) {
+  // Convert the seed into a numeric seed using seedrandom
   const rng = seedrandom(seed);
-  faker.seed(rng());
+  const numericSeed = Math.floor(rng() * 1_000_000); // Generate a consistent numeric seed
+  faker.seed(numericSeed); // Reinitialize faker with the numeric seed
 }
 
 // to generate random review from the seed rng given
 export function generateRandomReview(rng) {
-    
     const rating = Math.floor(rng() * 5) + 1;
     const text = faker.lorem.sentence();
     const reviewer = faker.person.fullName();
-
     return { rating, text, reviewer };
 }
 
 // generating review arrays using the above function and using tthe seed
 export function generateReviews(seed, averageReviews) {
     const rng = seedrandom(seed); // Seed the random number generator
-  
     const integerReviews = Math.floor(averageReviews);
     const fractionalReview = averageReviews - integerReviews;
   
