@@ -25,11 +25,13 @@ const Navbar = () => {
   return (
     <>
       <div className="flex items-center bg-base-200 w-full py-5 px-10 justify-between  sticky top-0 z-50 shadow-md">
-        <IoSettings
-          className=" cursor-pointer size-8 md:hidden"
-          onClick={() => document.getElementById("my_modal_1").showModal()}
-        />
-        <Logo />
+        <div className="flex md:gap-10 gap-4">
+          <Logo />
+          <IoSettings
+            className=" cursor-pointer size-8 md:hidden"
+            onClick={() => document.getElementById("my_modal_1").showModal()}
+          />
+        </div>
         <div className="md:flex items-center hidden lg:gap-6 gap-3">
           <div className="bg-base-100  border-1 border-gray-400 lg:w-[200px] w-[100px] py-2 flex items-center justify-between px-3 rounded-lg ">
             <div className="flex flex-col gap-0 text-start">
@@ -116,7 +118,7 @@ const Navbar = () => {
               />
             </div>
           </div>
-          <form method="dialog" >
+          <form method="dialog">
             <button className="btn mt-5">Close</button>
           </form>
         </div>
