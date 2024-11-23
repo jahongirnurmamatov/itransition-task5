@@ -36,7 +36,7 @@ export function generateBooks(
   initializeFakerWithSeed(combinedSeed, faker);
 
   const books = Array.from({ length: pageSize }).map((_, index) => {
-    const globalIndex = (page - 1) * pageSize + index;
+    const globalIndex = (page - 1) * 20 + index;
 
     const bookSeed = `${combinedSeed}-book-${globalIndex}`;
     const reviewSeed = `${bookSeed}-reviews`;
