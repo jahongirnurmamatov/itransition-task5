@@ -3,6 +3,7 @@ import Navbar from "./components/navbar/Navbar";
 import Table from "./components/Table";
 
 const App = () => {
+
   return (
     <div className="">
       <Navbar />

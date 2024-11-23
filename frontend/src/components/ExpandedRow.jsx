@@ -6,7 +6,7 @@ const ExpandedRow = ({ book }) => {
   return (
     <tr className="bg-secondary-content w-full">
       <td colSpan="6">
-        <div className="collapse collapse-open grid grid-cols-5 px-14 py-2">
+        <div className="collapse collapse-open md:grid md:grid-cols-5 md:px-14 px-2 sm:px-6 py-2 flex flex-col">
           <div className="col-span-1 flex flex-col gap-4 items-center py-5">
             <div className="relative">
               <img
@@ -14,8 +14,8 @@ const ExpandedRow = ({ book }) => {
                 src="/book-cover.webp"
                 alt={book.title}
               />
-              <p className="absolute top-10 px-3 font-bold   text-center font-serif  ">{book.title}</p>
-              <p className="absolute top-20 px-3 py-3 text-center italic  ">{book.author}</p>
+              <p className="absolute top-9 sm:top-10 px-3 font-bold sm:text-xs   text-center font-serif  ">{book.title}</p>
+              <p className="absolute top-16  sm:top-20 px-3 py-3 text-center sm:text-xs italic  ">{book.author}</p>
             </div>
             <p className="bg-blue-600 flex gap-2  px-2 py-1 rounded-full">
               <span className="text-white font-bold">{book.likes}</span>
