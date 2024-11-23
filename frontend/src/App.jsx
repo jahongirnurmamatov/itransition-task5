@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./components/navbar/Navbar";
 import Table from "./components/Table";
+import useNavStore from "./store/navbarStore";
 
 const App = () => {
-  const [grid, setGrid] = useState(false);
+  const {grid}  = useNavStore();
   return (
     <div className="">
       <Navbar />
-      {grid ? <div>grid value</div> : <Table />}
+      {grid ==='grid' ? <div>grid value</div> : <Table />}
     </div>
   );
 };

@@ -11,7 +11,7 @@ const marks = [
   { value: 10, label: '10' },
 ];
 const SliderCopm = () => {
-  const { setAverageLikes, averageLikes,lang } = useNavStore();
+  const { setAverageLikes, averageLikes } = useNavStore();
 
   return (
     <Slider

@@ -96,7 +96,7 @@ const Table = () => {
                     }`}
                   />
                 </td>
-                <td></td>
+                
               </tr>
               {expandedRow === index && <ExpandedRow book={book} />}
             </React.Fragment>

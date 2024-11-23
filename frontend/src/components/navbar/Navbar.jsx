@@ -47,7 +47,7 @@ const Navbar = () => {
             </div>
             <IoShuffle onClick={shuffle} size={24} />
           </div>
-          <div className="md:w-40 w-[100px] ">
+          <div className="md:w-30 w-[80px] ">
             <p className="text-gray-500 text-start text-sm">Likes</p>
             <SliderCopm />
           </div>
