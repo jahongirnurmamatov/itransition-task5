@@ -1,8 +1,13 @@
 import express from "express";
 import { generateBooks } from "./middleware/bookGeneration.js";
 import cors from "cors";
+import path from "path";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
+const PORT = process.env.PORT || 5000;
+const __dirname = path.resolve();
 app.use(cors());
 app.get("/api/books", (req, res) => {
   try {
@@ -25,8 +30,17 @@ app.get("/api/books", (req, res) => {
     res.json({ books });
   } catch (error) {
     console.log(error.message);
-    res.status(500).json(error.message)
+    res.status(500).json(error.message);
   }
 });
 
-app.listen(5000, () => console.log("Server running on http://localhost:5000"));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "frontend/dist")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+  });
+} 
+
+app.listen(5000, () =>
+  console.log("Server running on http://localhost: ", PORT)
+);
