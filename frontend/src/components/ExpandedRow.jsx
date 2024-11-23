@@ -14,8 +14,8 @@ const ExpandedRow = ({ book }) => {
                 src="/book-cover.webp"
                 alt={book.title}
               />
-              <p className="absolute top-9 sm:top-10 px-3 font-bold sm:text-xs   text-center font-serif  ">{book.title}</p>
-              <p className="absolute top-16  sm:top-20 px-3 py-3 text-center sm:text-xs italic  ">{book.author}</p>
+              <p className="absolute top-9 sm:top-10 px-3 font-bold sm:text-xs text-gray-800  text-center font-serif  ">{book.title}</p>
+              <p className="absolute top-16  sm:top-20 px-3 py-3 text-center text-gray-600 sm:text-xs italic  ">{book.author}</p>
             </div>
             <p className="bg-blue-600 flex gap-2  px-2 py-1 rounded-full">
               <span className="text-white font-bold">{book.likes}</span>
