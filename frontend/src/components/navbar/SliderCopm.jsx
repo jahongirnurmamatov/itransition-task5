@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Slider } from "@mui/material";
-import useBookStore from "../../store/bookStore";
+import useNavStore from "../../store/navbarStore";
 
 const marks = [
   { value: 0, label: '0' },
@@ -11,7 +11,7 @@ const marks = [
   { value: 10, label: '10' },
 ];
 const SliderCopm = () => {
-  const { setAverageLikes, averageLikes,lang } = useBookStore();
+  const { setAverageLikes, averageLikes,lang } = useNavStore();
 
   return (
     <Slider

@@ -3,10 +3,12 @@ import { IoShuffle } from "react-icons/io5";
 import ThemeToggle from "./ThemeToggle";
 import Logo from "./Logo";
 import SliderCopm from "./SliderCopm";
-import useBookStore from "../../store/bookStore";
 import { FaFileCsv } from "react-icons/fa6";
 import { CSVLink } from "react-csv";
 import { IoSettings } from "react-icons/io5";
+import RowGrid from "./RowGrid";
+import useNavStore from "../../store/navbarStore";
+import useBookStore from "../../store/bookStore";
 const Navbar = () => {
   const {
     seed,
@@ -15,8 +17,8 @@ const Navbar = () => {
     setLang,
     averageReviews,
     setAverageReviews,
-    books,
-  } = useBookStore();
+  } = useNavStore();
+  const {books} = useBookStore();
 
   const shuffle = () => {
     setSeed(Math.floor(Math.random() * 1000000) + 1);
@@ -24,7 +26,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="flex items-center bg-base-200 w-full py-5 px-10 justify-between  sticky top-0 z-50 shadow-md">
+      <div className="flex items-center bg-base-200 w-full py-5 md:px-10 px-4 justify-between  sticky top-0 z-50 shadow-md">
         <div className="flex md:gap-10 gap-4">
           <Logo />
           <IoSettings
@@ -82,8 +84,11 @@ const Navbar = () => {
               <FaFileCsv className="size-7 cursor-pointer" />
             </CSVLink>
           </div>
+          <RowGrid />
         </div>
       </div>
+
+      {/* modal */}
       <dialog id="my_modal_1" className="modal ">
         <div className="modal-box bg-base-300">
           <h3 className="text-xl mb-5">Set parameters</h3>

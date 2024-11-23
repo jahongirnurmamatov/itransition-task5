@@ -5,9 +5,11 @@ import useBookStore from "../store/bookStore";
 import { IoIosArrowDown } from "react-icons/io";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { fetchBooks } from "../middleware/apiFetching";
+import useNavStore from "../store/navbarStore";
 const Table = () => {
   const [expandedRow, setExpandedRow] = useState(null);
-  const { averageLikes, averageReviews, seed, lang, setBooks } = useBookStore();
+  const {setBooks} = useBookStore();
+  const { averageLikes, averageReviews, seed, lang } = useNavStore();
 
   const {
     data,

@@ -3,11 +3,11 @@ import Navbar from "./components/navbar/Navbar";
 import Table from "./components/Table";
 
 const App = () => {
-
+  const [grid, setGrid] = useState(false);
   return (
     <div className="">
       <Navbar />
-      <Table />
+      {grid ? <div>grid value</div> : <Table />}
     </div>
   );
 };
