@@ -1,4 +1,4 @@
-# Book Explorer Web App 📚
+I'll# Book Explorer Web App 📚
 
 Book Explorer is a dynamic web application that helps users explore, filter, and export book data. With features like seed-based shuffling, language selection, and customizable views (row/grid), it provides a seamless experience for book enthusiasts.
 
@@ -35,7 +35,6 @@ Book Explorer is a dynamic web application that helps users explore, filter, and
 
 ### Backend:
 - **Node.js** and **Express.js** for API development.
-- **MongoDB** for database management.
 
 ### Libraries and Tools:
 - **TanStack Query v5** for server state management.
